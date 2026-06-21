@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanki Liwaz — Handcrafted Ladies Suits & Bespoke Quoting</title>
+    <!-- Tailwind CSS for rich, modern design system -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for premium editorial typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for elegant boutique icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        boutique: {
+                            50: '#FAF6F0',   /* Soft Warm Ivory */
+                            100: '#F5EBE6',  /* Gentle Rose Blush */
+                            200: '#EAE1D9',  /* Soft Taupe Neutral */
+                            300: '#D9C8BC',  /* Warm Sand */
+                            400: '#C5A880',  /* Muted Gold Accent */
+                            500: '#A17E64',  /* Mid Tone Rose Earth */
+                            deep: '#2D221D', /* Deep Dark Espresso for Elegant Contrast */
+                            gold: '#D4AF37'  /* Classic Rich Gold */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+            color: #2D221D;
+        }
+        .editorial-title {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom scrollbar to keep layout premium and feminine */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between">
+
+    <!-- Navigation Header -->
+    <header class="border-b border-boutique-100 sticky top-0 bg-[#FAF6F0]/95 backdrop-blur-md z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="editorial-title text-2xl font-bold tracking-[0.2em] text-boutique-deep" id="nav-brand-name">NANKI LIWAZ</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold tracking-widest text-boutique-deep/80">
+                <a href="#catalogue" class="hover:text-boutique-gold transition-colors">OUR COLLECTION</a>
+                <a href="#how-it-works" class="hover:text-boutique-gold transition-colors">EASY ORDERING</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <!-- Boutique Control Toggle Button -->
+                <button onclick="toggleAdminPanel()" class="flex items-center gap-2 px-4 py-2 bg-boutique-deep text-[#FAF6F0] hover:bg-boutique-gold hover:text-boutique-deep transition-all duration-300 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span id="admin-btn-text">Boutique Panel</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Toast System -->
+    <div id="toast" class="fixed top-24 right-6 z-50 transform translate-x-full transition-transform duration-300 ease-out bg-boutique-deep text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-boutique-gold/20">
+        <span id="toast-icon" class="text-boutique-gold"><i class="fa-solid fa-circle-check"></i></span>
+        <p id="toast-message" class="text-sm font-medium tracking-wide"></p>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Minimal Announcement Banner -->
+        <div class="bg-boutique-100 py-2.5 text-center text-[10px] tracking-[0.25em] font-bold text-boutique-deep uppercase px-4 border-b border-boutique-200/40">
+            <span id="banner-announcement">⚜️ Exquisite Ladies Suits — Tailored To Perfection & Shared Over WhatsApp ⚜️</span>
+        </div>
+
+        <!-- Simplistic Hero Welcome Section -->
+        <section class="py-16 md:py-24 px-6 bg-gradient-to-b from-[#FAF6F0] to-white">
+            <div class="max-w-4xl mx-auto text-center space-y-6">
+                <div class="inline-flex items-center gap-2 bg-boutique-100 px-3.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-boutique-deep">
+                    <span class="w-1.5 h-1.5 rounded-full bg-boutique-gold"></span>
+                    <span id="section-hero-tag">The Festive Wardrobe</span>
+                </div>
+                
+                <h1 class="editorial-title text-4xl sm:text-6xl font-light tracking-tight text-boutique-deep leading-tight" id="section-hero-title">
+                    Simple, Elegance & <span class="italic font-normal text-boutique-gold">Beautiful Craft</span>
+                </h1>
+                
+                <p class="text-boutique-deep/70 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed" id="section-hero-desc">
+                    Browse our delicate hand-picked ladies suit collections. View details, choose standard pricing, or easily quote a comfortable budget to discuss with us on WhatsApp.
+                </p>
+                
+                <div class="pt-4">
+                    <a href="#catalogue" class="px-8 py-3.5 bg-boutique-deep text-[#FAF6F0] hover:bg-boutique-gold hover:text-boutique-deep transition-all duration-300 text-xs font-bold tracking-widest uppercase rounded-full shadow-md">
+                        Explore Outfits Below
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beautiful Ladies Suit Catalogue Section -->
+        <section id="catalogue" class="py-16 px-6 bg-white border-t border-boutique-100">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col items-center justify-center text-center mb-12 gap-4">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-boutique-gold mb-1 block" id="section-cat-tag">Exquisite Collections</span>
+                        <h2 class="editorial-title text-3xl sm:text-4xl font-light text-boutique-deep" id="section-cat-title">The Suit Gallery</h2>
+                    </div>
+                    <!-- Easy Collection Tabs -->
+                    <div class="flex flex-wrap justify-center gap-2 pt-2" id="filter-tabs-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Ladies Suit Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="suits-grid">
+                    <!-- Cards populated by JS dynamic state -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Simple Ordering Rules -->
+        <section id="how-it-works" class="py-16 px-6 bg-[#FAF6F0]/50 border-t border-b border-boutique-200/30">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-boutique-gold mb-1 block">Simple & Elegant Journey</span>
+                <h2 class="editorial-title text-2xl sm:text-3xl font-light text-boutique-deep mb-10">How To Purchase</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="space-y-3">
+                        <div class="text-xl font-serif text-boutique-gold">01. Browse Collection</div>
+                        <p class="text-xs text-boutique-deep/70 font-light leading-relaxed">Scroll through our elegant front page gallery and click on any design that catches your eye.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="text-xl font-serif text-boutique-gold">02. Quote Your Budget</div>
+                        <p class="text-xs text-boutique-deep/70 font-light leading-relaxed">Enter your comfort price. Add your name and details optionally to help us recognize you.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="text-xl font-serif text-boutique-gold">03. Finalize on WhatsApp</div>
+                        <p class="text-xs text-boutique-deep/70 font-light leading-relaxed">Your custom offer initiates a direct boutique conversation with us on WhatsApp to talk sizing and delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Slide-over / Modal Admin Settings Panel -->
+    <div id="admin-panel" class="fixed inset-y-0 right-0 w-full max-w-lg bg-white shadow-2xl border-l border-boutique-200 z-50 transform translate-x-full transition-transform duration-500 ease-in-out overflow-y-auto hidden">
+        <div class="p-8 space-y-8">
+            <div class="flex items-center justify-between border-b border-boutique-100 pb-5">
+                <div>
+                    <h2 class="editorial-title text-2xl font-light text-boutique-deep">Boutique Customizer</h2>
+                    <p class="text-[10px] text-boutique-gold tracking-widest uppercase font-bold">Nanki Liwaz Settings</p>
+                </div>
+                <button onclick="toggleAdminPanel()" class="w-10 h-10 rounded-full hover:bg-boutique-100 flex items-center justify-center text-boutique-deep transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- WhatsApp Configuration Block -->
+            <div class="space-y-3 bg-[#FAF6F0] p-5 rounded-2xl border border-boutique-200">
+                <h3 class="text-xs font-bold text-boutique-deep tracking-wider uppercase flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-green-600 text-lg"></i> WhatsApp Number
+                </h3>
+                <p class="text-xs text-boutique-deep/60">Change your business WhatsApp number where custom ladies suit enquiries and offers should land.</p>
+                <div>
+                    <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">WhatsApp Number (with country code, no space/symbols)</label>
+                    <input type="text" id="admin-whatsapp-input" placeholder="e.g. 919876543210" class="w-full px-4 py-2.5 rounded-lg border border-boutique-300 text-sm font-semibold focus:ring-2 focus:ring-boutique-gold focus:outline-none">
+                </div>
+            </div>
+
+            <!-- Sections Name Customization Block -->
+            <div class="space-y-4">
+                <h3 class="text-xs font-bold text-boutique-deep tracking-wider uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-pen-nib text-boutique-gold"></i> Customize Section Labels
+                </h3>
+                <div class="grid grid-cols-1 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Boutique / Brand Name</label>
+                        <input type="text" id="edit-brand-name" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Hero Tagline Highlight</label>
+                        <input type="text" id="edit-hero-tag" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Main Hero Title Text</label>
+                        <input type="text" id="edit-hero-title" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Gallery Tagline</label>
+                        <input type="text" id="edit-cat-tag" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Gallery Main Section Name</label>
+                        <input type="text" id="edit-cat-title" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 text-sm">
+                    </div>
+                </div>
+                <button onclick="saveSectionRenaming()" class="w-full py-3 bg-boutique-deep hover:bg-boutique-gold hover:text-boutique-deep text-[#FAF6F0] text-[10px] font-bold tracking-widest uppercase rounded-lg transition-colors">
+                    Save Label Customizations
+                </button>
+            </div>
+
+            <!-- Dynamic Category Management -->
+            <div class="space-y-3">
+                <h3 class="text-xs font-bold text-boutique-deep tracking-wider uppercase">Manage Catalogue Categories</h3>
+                <div class="flex gap-2">
+                    <input type="text" id="new-category-name" placeholder="New Category (e.g. Silk Anarkalis)" class="w-full px-4 py-2 rounded-lg border border-boutique-200 text-sm">
+                    <button onclick="addNewCategory()" class="px-4 py-2 bg-boutique-gold text-boutique-deep rounded-lg text-xs font-bold uppercase tracking-wider">Add</button>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2" id="admin-category-badges">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Suit Upload Form -->
+            <div class="border-t border-boutique-100 pt-6 space-y-4">
+                <h3 class="text-sm font-semibold text-boutique-deep tracking-wider uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-plus text-boutique-gold"></i> Upload New Suit Masterpiece
+                </h3>
+                
+                <div class="grid grid-cols-1 gap-3 text-sm">
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Outfit / Suit Name</label>
+                        <input type="text" id="suit-name-input" placeholder="e.g. Crimson Silk Anarkali Suit Set" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Bespoke Fitting Retail Price ($)</label>
+                            <input type="number" id="suit-price-input" placeholder="e.g. 290" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Category</label>
+                            <select id="suit-category-select" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 bg-white">
+                                <!-- Loaded dynamically -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Material & Suit Specifications</label>
+                        <textarea id="suit-desc-input" rows="3" placeholder="Handcrafted with pure georgette, complete with premium zari work and designer matching organza dupatta." class="w-full px-4 py-2.5 rounded-lg border border-boutique-200"></textarea>
+                    </div>
+
+                    <!-- Custom Image Input Options (URL & File upload) -->
+                    <div class="space-y-2">
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase">Suit Photo Selection</label>
+                        <div class="grid grid-cols-1 gap-2">
+                            <input type="text" id="suit-img-url" placeholder="Direct Image Link (Optional)" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200">
+                            <div class="text-center text-[10px] text-boutique-gold font-bold uppercase">OR</div>
+                            <div class="relative border-2 border-dashed border-boutique-200 rounded-lg p-4 bg-[#FAF6F0] hover:bg-boutique-100/50 transition-colors">
+                                <input type="file" id="suit-img-file" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="previewUploadedImage(event)">
+                                <div class="space-y-1 text-center">
+                                    <i class="fa-solid fa-cloud-arrow-up text-xl text-boutique-gold block"></i>
+                                    <span class="text-xs text-boutique-deep font-semibold block" id="upload-status-label">Choose Outfit Image File</span>
+                                </div>
+                            </div>
+                            <img id="upload-img-preview" src="#" alt="Preview" class="hidden w-24 h-24 object-cover rounded-lg border border-boutique-200 mx-auto mt-2">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="submitNewSuit()" class="w-full py-3 bg-boutique-gold text-boutique-deep text-[10px] font-bold tracking-widest uppercase rounded-lg transition-colors hover:bg-boutique-deep hover:text-[#FAF6F0]">
+                    Publish To Front Page
+                </button>
+            </div>
+
+            <!-- Demo Reset Controls -->
+            <div class="border-t border-boutique-100 pt-6 flex justify-between items-center text-[11px]">
+                <span class="text-boutique-deep/50">Need to restart the boutique inventory demo?</span>
+                <button onclick="resetToDemoDefaults()" class="text-red-500 hover:text-red-700 underline font-semibold uppercase tracking-wider text-[10px]">Reset Defaults</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Quote Proposal Modal -->
+    <div id="quote-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-boutique-200 transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="relative p-6 bg-gradient-to-r from-boutique-deep to-[#3D2E2B] text-white">
+                <button onclick="closeQuoteModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+                <span class="text-[9px] tracking-widest uppercase text-boutique-gold font-bold mb-1 block">Bespoke Design Inquiry</span>
+                <h3 class="editorial-title text-2xl font-light" id="modal-suit-title">Crimson Silk Anarkali Set</h3>
+                <p class="text-xs text-white/70 mt-1" id="modal-suit-base-price">Estimated standard price: $290</p>
+            </div>
+
+            <!-- Modal Content & Inputs -->
+            <div class="p-6 space-y-5">
+                <p class="text-xs text-boutique-deep/60 leading-relaxed">
+                    Submit your comfortable budget quote and personal preferences directly to us. Clicking the button below opens your custom design inquiry instantly in our WhatsApp thread!
+                </p>
+
+                <!-- Quote Input Form -->
+                <div class="space-y-4">
+                    <!-- Crucial Quote Field -->
+                    <div>
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Your Quote Price ($)*</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-boutique-deep/50 font-bold">$</span>
+                            <input type="number" id="client-quote-price" required placeholder="Offer your budget" class="w-full pl-8 pr-4 py-2.5 rounded-xl border border-boutique-gold focus:ring-2 focus:ring-boutique-gold focus:outline-none text-base font-semibold text-boutique-deep bg-[#FAF6F0]/40">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-boutique-100 pt-3">
+                        <p class="text-[10px] text-boutique-gold font-bold uppercase tracking-wider mb-2">Optional Fitting Details (Not Required)</p>
+                        
+                        <div class="grid grid-cols-1 gap-2.5">
+                            <div>
+                                <label class="block text-[9px] font-bold text-boutique-deep uppercase mb-1">Your Name</label>
+                                <input type="text" id="client-name" placeholder="E.g. Meera Sharma" class="w-full px-3 py-2 rounded-lg border border-boutique-200 text-xs text-boutique-deep bg-[#FAF6F0]/20">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[9px] font-bold text-boutique-deep uppercase mb-1">Contact Phone</label>
+                                    <input type="tel" id="client-phone" placeholder="E.g. +91 98765..." class="w-full px-3 py-2 rounded-lg border border-boutique-200 text-xs text-boutique-deep bg-[#FAF6F0]/20">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-bold text-boutique-deep uppercase mb-1">Age</label>
+                                    <input type="number" id="client-age" placeholder="E.g. 28" class="w-full px-3 py-2 rounded-lg border border-boutique-200 text-xs text-boutique-deep bg-[#FAF6F0]/20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action Buttons -->
+                <div class="pt-2 flex gap-3">
+                    <button onclick="closeQuoteModal()" class="w-1/3 py-2.5 border border-boutique-200 hover:bg-[#FAF6F0] rounded-xl text-[10px] font-bold uppercase tracking-wider text-boutique-deep transition-colors">
+                        Close
+                    </button>
+                    <button onclick="redirectQuoteToWhatsApp()" class="w-2/3 py-2.5 bg-boutique-deep hover:bg-boutique-gold hover:text-boutique-deep text-[#FAF6F0] rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        Quote on WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Footer -->
+    <footer class="bg-boutique-deep text-[#FAF6F0] py-12 px-6 border-t border-boutique-500/20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            <div class="text-center md:text-left space-y-1">
+                <span class="editorial-title text-xl font-bold tracking-[0.2em] text-boutique-gold animate-pulse" id="footer-brand-name">NANKI LIWAZ</span>
+                <p class="text-xs text-[#FAF6F0]/60 font-light">Handcrafted, ultra-elegant Ladies Boutique Tailoring.</p>
+            </div>
+            <div class="flex justify-center gap-6 text-xs text-[#FAF6F0]/80 tracking-widest font-bold">
+                <a href="#catalogue" class="hover:text-boutique-gold transition-colors">GALLERY</a>
+                <a href="#how-it-works" class="hover:text-boutique-gold transition-colors">HOW TO BUY</a>
+                <button onclick="toggleAdminPanel()" class="hover:text-boutique-gold transition-colors uppercase">CUSTOMIZER</button>
+            </div>
+            <div class="text-center md:text-right text-[10px] text-[#FAF6F0]/50 tracking-wider">
+                <p>&copy; 2026 Nanki Liwaz. All Rights Reserved.</p>
+                <p class="mt-1">Crafting custom designs instantly linked over direct WhatsApp APIs.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global State & Local Storage Key
+        const STATE_KEY = 'nankiliwaz_app_state_v1';
+
+        // Elegant default suits focusing on classic, soft, luxury Ladies Suit Styles
+        const DEFAULT_SUITS = [
+            {
+                id: 'suit_1',
+                name: 'Elegant Crimson Silk Anarkali Suit Set',
+                category: 'Festive Wear',
+                price: 290,
+                desc: 'Bespoke handwoven Banarasi georgette silk with a grand flowing silhouette. Complete with luxurious matching zari borders and premium matching organza dupatta.',
+                imageUrl: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                id: 'suit_2',
+                name: 'Pastel Mint Organza Salwar Suit',
+                category: 'Pastel Organzas',
+                price: 180,
+                desc: 'Whisper-soft breathable premium organza material beautifully stitched with detailed hand embroidery floral motifs. Simple, elegant, and perfect for intimate summer gatherings.',
+                imageUrl: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=800'
+            },
+            {
+                id: 'suit_3',
+                name: 'Ivory Pearl Designer Pant Suit Set',
+                category: 'Designer Pantsuits',
+                price: 340,
+                desc: 'Contemporary, luxury minimalist ivory georgette suit paired with custom straight-fit formal trousers. Beautifully adorned with subtle pearl-beaded borders and custom lining.',
+                imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=800'
+            }
+        ];
+
+        const DEFAULT_SECTIONS = ['All', 'Festive Wear', 'Pastel Organzas', 'Designer Pantsuits'];
+
+        const DEFAULT_BRANDING = {
+            brandName: 'NANKI LIWAZ',
+            heroTag: 'The Festive Wardrobe',
+            heroTitle: 'Simple, Elegance & <span class="italic font-normal text-boutique-gold">Beautiful Craft</span>',
+            heroDesc: 'Browse our delicate hand-picked ladies suit collections. View details, choose standard pricing, or easily quote a comfortable budget to discuss with us on WhatsApp.',
+            catTag: 'Exquisite Collections',
+            catTitle: 'The Suit Gallery',
+            whatsappNumber: '919999999999' // Placeholder standard global format
+        };
+
+        // Application State Database
+        let appState = {
+            suits: [...DEFAULT_SUITS],
+            categories: [...DEFAULT_SECTIONS],
+            branding: { ...DEFAULT_BRANDING },
+            currentFilter: 'All'
+        };
+
+        // Save layout to browser memory
+        function saveStateToLocalStorage() {
+            localStorage.setItem(STATE_KEY, JSON.stringify(appState));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem(STATE_KEY);
+            if (saved) {
+                try {
+                    appState = JSON.parse(saved);
+                } catch (e) {
+                    console.error("Error reading boutique data, using defaults.", e);
+                }
+            }
+            renderApp();
+        }
+
+        // Reset system function
+        function resetToDemoDefaults() {
+            if (confirm("Are you sure you want to reset Nanki Liwaz back to pristine demo settings?")) {
+                localStorage.removeItem(STATE_KEY);
+                appState = {
+                    suits: [...DEFAULT_SUITS],
+                    categories: [...DEFAULT_SECTIONS],
+                    branding: { ...DEFAULT_BRANDING },
+                    currentFilter: 'All'
+                };
+                renderApp();
+                showToast("Boutique successfully reset to default premium state!");
+            }
+        }
+
+        // Premium toast system
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.innerText = message;
+            if (isSuccess) {
+                toastIcon.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 text-lg"></i>';
+            } else {
+                toastIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-amber-500 text-lg"></i>';
+            }
+
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 4000);
+        }
+
+        // Convert files locally
+        let tempBase64Image = '';
+        function previewUploadedImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                tempBase64Image = e.target.result;
+                const preview = document.getElementById('upload-img-preview');
+                preview.src = tempBase64Image;
+                preview.classList.remove('hidden');
+                document.getElementById('upload-status-label').innerText = file.name;
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Main Dynamic Rendering Engine
+        function renderApp() {
+            // Apply Branding to UI
+            document.getElementById('nav-brand-name').innerText = appState.branding.brandName;
+            document.getElementById('footer-brand-name').innerText = appState.branding.brandName;
+            document.getElementById('section-hero-tag').innerText = appState.branding.heroTag;
+            document.getElementById('section-hero-title').innerHTML = appState.branding.heroTitle;
+            document.getElementById('section-hero-desc').innerText = appState.branding.heroDesc;
+            document.getElementById('section-cat-tag').innerText = appState.branding.catTag;
+            document.getElementById('section-cat-title').innerText = appState.branding.catTitle;
+
+            // Sync configuration panel inputs
+            document.getElementById('edit-brand-name').value = appState.branding.brandName;
+            document.getElementById('edit-hero-tag').value = appState.branding.heroTag;
+            document.getElementById('edit-hero-title').value = appState.branding.heroTitle;
+            document.getElementById('edit-cat-tag').value = appState.branding.catTag;
+            document.getElementById('edit-cat-title').value = appState.branding.catTitle;
+            document.getElementById('admin-whatsapp-input').value = appState.branding.whatsappNumber;
+
+            // Render Suit Category Tabs
+            renderCategoryTabs();
+
+            // Render Suits Grid with Filters
+            renderSuitGrid();
+
+            // Populate Admin Category Select Dropdowns
+            populateAdminControls();
+        }
+
+        // Filter Actions
+        function selectFilter(category) {
+            appState.currentFilter = category;
+            renderCategoryTabs();
+            renderSuitGrid();
+        }
+
+        function renderCategoryTabs() {
+            const container = document.getElementById('filter-tabs-container');
+            container.innerHTML = '';
+
+            appState.categories.forEach(cat => {
+                const isSelected = appState.currentFilter === cat;
+                const btn = document.createElement('button');
+                btn.onclick = () => selectFilter(cat);
+                btn.className = `px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 ${
+                    isSelected 
+                    ? 'bg-boutique-deep text-[#FAF6F0] shadow-md' 
+                    : 'bg-boutique-100 hover:bg-boutique-200/70 text-boutique-deep/80'
+                }`;
+                btn.innerText = cat;
+                container.appendChild(btn);
+            });
+        }
+
+        function renderSuitGrid() {
+            const grid = document.getElementById('suits-grid');
+            grid.innerHTML = '';
+
+            // Filter suits based on category selection
+            const filteredSuits = appState.currentFilter === 'All' 
+                ? appState.suits 
+                : appState.suits.filter(suit => suit.category === appState.currentFilter);
+
+            if (filteredSuits.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center space-y-4">
+                        <i class="fa-solid fa-folder-open text-4xl text-boutique-gold/40"></i>
+                        <p class="text-boutique-deep/60 font-light">No custom outfits uploaded in this gallery yet. Open the Boutique Panel to publish outfits instantly.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredSuits.forEach(suit => {
+                const card = document.createElement('div');
+                card.className = "group bg-white rounded-2xl overflow-hidden border border-boutique-200/30 hover:border-boutique-gold/40 transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col justify-between";
+                
+                // Fallback display
+                const finalImgSrc = suit.imageUrl || 'https://placehold.co/600x800/f5ebe6/2d221d?text=Luxury+Collection';
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Image Container -->
+                        <div class="aspect-[4/5] relative overflow-hidden bg-boutique-50">
+                            <img src="${finalImgSrc}" alt="${suit.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x800/f5ebe6/2d221d?text=Nanki+Liwaz'">
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-boutique-deep text-[10px] uppercase tracking-widest font-bold px-3 py-1.5 rounded-full shadow-sm">
+                                ${suit.category}
+                            </span>
+                            <!-- Delete button (visible on hover) -->
+                            <button onclick="deleteSuit('${suit.id}')" class="absolute top-4 right-4 bg-red-500/90 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md" title="Delete design">
+                                <i class="fa-solid fa-trash text-xs"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Content Details -->
+                        <div class="p-6 space-y-3">
+                            <h3 class="editorial-title text-xl text-boutique-deep font-light group-hover:text-boutique-gold transition-colors">${suit.name}</h3>
+                            <p class="text-xs text-boutique-deep/70 font-light leading-relaxed line-clamp-3">${suit.desc}</p>
+                        </div>
+                    </div>
+
+                    <!-- Quote CTA Actions -->
+                    <div class="p-6 pt-0 border-t border-boutique-100/50 mt-auto flex items-center justify-between gap-4">
+                        <div>
+                            <span class="text-[9px] uppercase text-boutique-deep/40 tracking-widest font-bold block">Estimated Value</span>
+                            <span class="text-lg font-bold text-boutique-deep font-serif">$${suit.price.toLocaleString()}</span>
+                        </div>
+                        <button onclick="openQuoteModal('${suit.id}')" class="px-5 py-3 bg-boutique-deep hover:bg-boutique-gold hover:text-boutique-deep text-[#FAF6F0] text-[10px] font-bold tracking-widest uppercase rounded-xl transition-all duration-300 transform active:scale-95 shadow-sm">
+                            Quote Price
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Populate controls in Admin Dashboard
+        function populateAdminControls() {
+            // Dropdown List for Upload Form
+            const select = document.getElementById('suit-category-select');
+            if (select) {
+                select.innerHTML = '';
+                appState.categories.forEach(cat => {
+                    if (cat === 'All') return; // Skip "All" for category picker
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.innerText = cat;
+                    select.appendChild(opt);
+                });
+            }
+
+            // Admin category badges list with delete options
+            const badgeContainer = document.getElementById('admin-category-badges');
+            if (badgeContainer) {
+                badgeContainer.innerHTML = '';
+                appState.categories.forEach(cat => {
+                    if (cat === 'All') return;
+                    const badge = document.createElement('span');
+                    badge.className = "inline-flex items-center gap-1.5 bg-boutique-100 text-boutique-deep px-3 py-1 rounded-full text-xs font-semibold";
+                    badge.innerHTML = `
+                        ${cat}
+                        <button onclick="deleteCategory('${cat}')" class="hover:text-red-500 transition-colors">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                    `;
+                    badgeContainer.appendChild(badge);
+                });
+            }
+        }
+
+        // Label Customization
+        function saveSectionRenaming() {
+            appState.branding.brandName = document.getElementById('edit-brand-name').value.trim() || DEFAULT_BRANDING.brandName;
+            appState.branding.heroTag = document.getElementById('edit-hero-tag').value.trim() || DEFAULT_BRANDING.heroTag;
+            appState.branding.heroTitle = document.getElementById('edit-hero-title').value.trim() || DEFAULT_BRANDING.heroTitle;
+            appState.branding.catTag = document.getElementById('edit-cat-tag').value.trim() || DEFAULT_BRANDING.catTag;
+            appState.branding.catTitle = document.getElementById('edit-cat-title').value.trim() || DEFAULT_BRANDING.catTitle;
+            
+            // Capture updated WhatsApp phone numbers
+            const rawWhatsApp = document.getElementById('admin-whatsapp-input').value.replace(/[^0-9]/g, '');
+            if (rawWhatsApp) {
+                appState.branding.whatsappNumber = rawWhatsApp;
+            } else {
+                appState.branding.whatsappNumber = DEFAULT_BRANDING.whatsappNumber;
+            }
+
+            saveStateToLocalStorage();
+            renderApp();
+            showToast("Boutique labels & configuration updated successfully!");
+        }
+
+        // Add Categories Dynamically
+        function addNewCategory() {
+            const input = document.getElementById('new-category-name');
+            const newCat = input.value.trim();
+
+            if (!newCat) {
+                showToast("Please enter a valid section name", false);
+                return;
+            }
+
+            if (appState.categories.includes(newCat)) {
+                showToast("Section already exists", false);
+                return;
+            }
+
+            appState.categories.push(newCat);
+            input.value = '';
+            saveStateToLocalStorage();
+            renderApp();
+            showToast(`Added section: "${newCat}"`);
+        }
+
+        function deleteCategory(catName) {
+            if (confirm(`Are you sure you want to delete "${catName}"? Associated outfits will become uncategorized.`)) {
+                appState.categories = appState.categories.filter(cat => cat !== catName);
+                
+                appState.suits.forEach(suit => {
+                    if (suit.category === catName) {
+                        suit.category = appState.categories[0] || 'All';
+                    }
+                });
+
+                if (appState.currentFilter === catName) {
+                    appState.currentFilter = 'All';
+                }
+
+                saveStateToLocalStorage();
+                renderApp();
+                showToast(`Section deleted.`);
+            }
+        }
+
+        // Submit New Ladies Suit
+        function submitNewSuit() {
+            const name = document.getElementById('suit-name-input').value.trim();
+            const price = parseFloat(document.getElementById('suit-price-input').value);
+            const category = document.getElementById('suit-category-select').value;
+            const desc = document.getElementById('suit-desc-input').value.trim();
+            const urlImg = document.getElementById('suit-img-url').value.trim();
+
+            if (!name || isNaN(price) || !category || !desc) {
+                showToast("Please complete all fields to publish design.", false);
+                return;
+            }
+
+            // Figure out image precedence (Base64 file upload first, then manual URL, then fallback)
+            let finalImg = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=800';
+            if (tempBase64Image) {
+                finalImg = tempBase64Image;
+            } else if (urlImg) {
+                finalImg = urlImg;
+            }
+
+            const newSuit = {
+                id: 'suit_' + Date.now(),
+                name,
+                category,
+                price,
+                desc,
+                imageUrl: finalImg
+            };
+
+            appState.suits.unshift(newSuit);
+            saveStateToLocalStorage();
+            
+            // Clear inputs
+            document.getElementById('suit-name-input').value = '';
+            document.getElementById('suit-price-input').value = '';
+            document.getElementById('suit-desc-input').value = '';
+            document.getElementById('suit-img-url').value = '';
+            document.getElementById('suit-img-file').value = '';
+            document.getElementById('upload-img-preview').classList.add('hidden');
+            document.getElementById('upload-status-label').innerText = 'Choose Outfit Image File';
+            tempBase64Image = '';
+
+            renderApp();
+            showToast(`"${name}" is now live in your boutique collection!`);
+        }
+
+        // Delete Catalog Item
+        function deleteSuit(id) {
+            const targetSuit = appState.suits.find(s => s.id === id);
+            const suitName = targetSuit ? targetSuit.name : "Outfit";
+
+            if (confirm(`Are you sure you want to remove "${suitName}" from Nanki Liwaz collection?`)) {
+                appState.suits = appState.suits.filter(suit => suit.id !== id);
+                saveStateToLocalStorage();
+                renderApp();
+                showToast(`Removed "${suitName}" from inventory.`);
+            }
+        }
+
+        // Slide Panels Toggle Control
+        function toggleAdminPanel() {
+            const panel = document.getElementById('admin-panel');
+            const btnText = document.getElementById('admin-btn-text');
+            
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                setTimeout(() => panel.classList.remove('translate-x-full'), 10);
+                btnText.innerText = "Close Panel";
+            } else {
+                panel.classList.add('translate-x-full');
+                setTimeout(() => panel.classList.add('hidden'), 500);
+                btnText.innerText = "Boutique Panel";
+            }
+        }
+
+        // Quotation Modal Control
+        let activeQuoteSuit = null;
+
+        function openQuoteModal(suitId) {
+            const suit = appState.suits.find(s => s.id === suitId);
+            if (!suit) return;
+
+            activeQuoteSuit = suit;
+
+            document.getElementById('modal-suit-title').innerText = suit.name;
+            document.getElementById('modal-suit-base-price').innerText = `Estimated Retail Price: $${suit.price.toLocaleString()}`;
+            document.getElementById('client-quote-price').value = Math.round(suit.price * 0.9); // Gentle suggestion pre-filled
+
+            const modal = document.getElementById('quote-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.children[0].classList.remove('scale-95', 'opacity-0');
+                modal.children[0].classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeQuoteModal() {
+            const modal = document.getElementById('quote-modal');
+            modal.children[0].classList.add('scale-95', 'opacity-0');
+            modal.children[0].classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+            activeQuoteSuit = null;
+        }
+
+        // WhatsApp Custom Redirect Script
+        function redirectQuoteToWhatsApp() {
+            const quotePrice = parseFloat(document.getElementById('client-quote-price').value);
+            const clientName = document.getElementById('client-name').value.trim();
+            const clientPhone = document.getElementById('client-phone').value.trim();
+            const clientAge = document.getElementById('client-age').value.trim();
+
+            if (isNaN(quotePrice) || quotePrice <= 0) {
+                showToast("Please specify a custom quoted budget.", false);
+                return;
+            }
+
+            const brand = appState.branding.brandName;
+            const suitName = activeQuoteSuit ? activeQuoteSuit.name : "Ladies Suit Outfit";
+            const retailPrice = activeQuoteSuit ? activeQuoteSuit.price : 0;
+            
+            // Aesthetic template layout for message
+            let msg = `*⚜️ ${brand.toUpperCase()} DESIGN QUOTE ⚜️*\n\n`;
+            msg += `Hello! I fell in love with your ladies collection at *${brand}* and would love to propose a quote for this beautiful outfit:\n\n`;
+            msg += `👗 *Design Name:* ${suitName}\n`;
+            msg += `🏷️ *Boutique Price:* $${retailPrice.toLocaleString()}\n`;
+            msg += `💰 *My Comfort Offer:* $${quotePrice.toLocaleString()}\n\n`;
+            
+            // Optional Client Fitting Metadata
+            const hasOptional = clientName || clientPhone || clientAge;
+            if (hasOptional) {
+                msg += `*📄 CLIENT SPECIFICATIONS:*\n`;
+                if (clientName) msg += `• *Name:* ${clientName}\n`;
+                if (clientPhone) msg += `• *Contact Phone:* ${clientPhone}\n`;
+                if (clientAge) msg += `• *Age:* ${clientAge} years old\n`;
+                msg += `\n`;
+            }
+
+            msg += `Could we kindly discuss custom sizing, boutique fabric options, and fitting details? Thank you!`;
+
+            const encodedText = encodeURIComponent(msg);
+            const phone = appState.branding.whatsappNumber; // Dynamically adjusted
+            const waUrl = `https://wa.me/${phone}?text=${encodedText}`;
+
+            // Reset inputs
+            document.getElementById('client-name').value = '';
+            document.getElementById('client-phone').value = '';
+            document.getElementById('client-age').value = '';
+
+            closeQuoteModal();
+            showToast("Opening secure connection to WhatsApp thread...");
+            window.open(waUrl, '_blank');
+        }
+
+        // Initialization
+        window.onload = function() {
+            loadState();
+        };
+    </script>
+</body>
+</html>
+
+
