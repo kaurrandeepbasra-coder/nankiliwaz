@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -64,8 +65,10 @@
     <!-- Navigation Header -->
     <header class="border-b border-boutique-100 sticky top-0 bg-[#FAF6F0]/95 backdrop-blur-md z-40 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <span class="editorial-title text-2xl font-bold tracking-[0.2em] text-boutique-deep" id="nav-brand-name">NANKI LIWAZ</span>
+            <!-- Double-click the logo brand name to prompt Admin Passcode -->
+            <div class="flex items-center gap-2 cursor-pointer select-none group" ondblclick="revealAdminLogin()" title="Owner: Double-click to access configurations">
+                <span class="editorial-title text-2xl font-bold tracking-[0.2em] text-boutique-deep group-hover:text-boutique-gold transition-colors" id="nav-brand-name">NANKI LIWAZ</span>
+                <span class="text-[9px] text-boutique-gold font-bold uppercase tracking-widest hidden group-hover:inline opacity-40 ml-1">(Owner Access)</span>
             </div>
             
             <nav class="hidden md:flex items-center gap-8 text-xs font-semibold tracking-widest text-boutique-deep/80">
@@ -74,11 +77,13 @@
             </nav>
 
             <div class="flex items-center gap-4">
-                <!-- Boutique Control Toggle Button -->
-                <button onclick="toggleAdminPanel()" class="flex items-center gap-2 px-4 py-2 bg-boutique-deep text-[#FAF6F0] hover:bg-boutique-gold hover:text-boutique-deep transition-all duration-300 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm">
-                    <i class="fa-solid fa-sliders"></i>
-                    <span id="admin-btn-text">Boutique Panel</span>
-                </button>
+                <!-- Secret Boutique Control Toggle Button (Only displayed to logged-in owners) -->
+                <div id="admin-header-badge" class="hidden">
+                    <button onclick="toggleAdminPanel()" class="flex items-center gap-2 px-4 py-2 bg-boutique-deep text-[#FAF6F0] hover:bg-boutique-gold hover:text-boutique-deep transition-all duration-300 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span id="admin-btn-text">Boutique Panel</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -164,6 +169,45 @@
         </section>
     </main>
 
+    <!-- Owner Passcode Login Modal -->
+    <div id="admin-login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-boutique-200 transform scale-95 opacity-0 transition-all duration-300 p-6 space-y-4">
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-boutique-100 text-boutique-gold flex items-center justify-center mx-auto mb-2 text-lg">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="editorial-title text-xl font-light text-boutique-deep">Boutique Owner Access</h3>
+                <p class="text-xs text-boutique-deep/60 mt-1">Please enter your passcode to unlock editing and customization tools.</p>
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Passcode (Default is 1234)</label>
+                <input type="password" id="admin-passcode-input" placeholder="••••" class="w-full text-center tracking-widest px-4 py-2.5 rounded-xl border border-boutique-gold focus:ring-2 focus:ring-boutique-gold focus:outline-none text-lg font-bold text-boutique-deep bg-[#FAF6F0]/40">
+            </div>
+            <div class="flex gap-2.5">
+                <button onclick="closeAdminLogin()" class="w-1/2 py-2.5 border border-boutique-200 hover:bg-[#FAF6F0] rounded-xl text-[10px] font-bold uppercase tracking-wider text-boutique-deep transition-colors">Cancel</button>
+                <button onclick="verifyAdminPasscode()" class="w-1/2 py-2.5 bg-boutique-deep hover:bg-boutique-gold hover:text-boutique-deep text-[#FAF6F0] rounded-xl text-[10px] font-bold uppercase tracking-widest transition-colors">Unlock</button>
+            </div>
+            <p class="text-[9px] text-center text-boutique-deep/40 italic">Note: Normal clients browsing the site cannot see this gate.</p>
+        </div>
+    </div>
+
+    <!-- Beautiful Custom Confirmation Modal -->
+    <div id="confirm-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-boutique-200 transform scale-95 opacity-0 transition-all duration-300 p-6 space-y-4 text-center">
+            <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="space-y-1">
+                <h3 class="editorial-title text-xl font-light text-boutique-deep" id="confirm-title">Are you sure?</h3>
+                <p class="text-xs text-boutique-deep/70" id="confirm-message">This action cannot be undone.</p>
+            </div>
+            <div class="flex gap-3 pt-2">
+                <button id="confirm-cancel-btn" class="w-1/2 py-2.5 border border-boutique-200 hover:bg-[#FAF6F0] rounded-xl text-[10px] font-bold uppercase tracking-wider text-boutique-deep transition-colors">Cancel</button>
+                <button id="confirm-proceed-btn" class="w-1/2 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest transition-colors">Proceed</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Slide-over / Modal Admin Settings Panel -->
     <div id="admin-panel" class="fixed inset-y-0 right-0 w-full max-w-lg bg-white shadow-2xl border-l border-boutique-200 z-50 transform translate-x-full transition-transform duration-500 ease-in-out overflow-y-auto hidden">
         <div class="p-8 space-y-8">
@@ -172,8 +216,26 @@
                     <h2 class="editorial-title text-2xl font-light text-boutique-deep">Boutique Customizer</h2>
                     <p class="text-[10px] text-boutique-gold tracking-widest uppercase font-bold">Nanki Liwaz Settings</p>
                 </div>
-                <button onclick="toggleAdminPanel()" class="w-10 h-10 rounded-full hover:bg-boutique-100 flex items-center justify-center text-boutique-deep transition-colors">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+                <div class="flex items-center gap-2">
+                    <button onclick="logoutAdmin()" class="px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-colors" title="Lock panel and hide from display">
+                        <i class="fa-solid fa-lock"></i> Lock Admin
+                    </button>
+                    <button onclick="toggleAdminPanel()" class="w-10 h-10 rounded-full hover:bg-boutique-100 flex items-center justify-center text-boutique-deep transition-colors">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- EXPORT WEBSITE BUTTON (Crucial for static web deployment) -->
+            <div class="space-y-3 bg-boutique-50 p-5 rounded-2xl border-2 border-dashed border-boutique-gold/50 text-center">
+                <h3 class="text-xs font-bold text-boutique-deep tracking-wider uppercase flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-down text-boutique-gold text-base"></i> Save Changes to GitHub
+                </h3>
+                <p class="text-xs text-boutique-deep/70">
+                    To make your newly added suits and brand names visible to customers, export the updated file and upload it to your GitHub repository.
+                </p>
+                <button onclick="exportUpdatedHTML()" class="w-full py-3 bg-gradient-to-r from-boutique-gold to-yellow-600 hover:from-boutique-deep hover:to-boutique-deep text-boutique-deep hover:text-white transition-all duration-300 text-xs font-bold tracking-widest uppercase rounded-xl shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-code"></i> Export Website File (index.html)
                 </button>
             </div>
 
@@ -215,9 +277,13 @@
                         <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Gallery Main Section Name</label>
                         <input type="text" id="edit-cat-title" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 text-sm">
                     </div>
+                    <div class="border-t border-boutique-100 pt-3">
+                        <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1 text-boutique-gold">Boutique Passcode PIN</label>
+                        <input type="password" id="edit-admin-passcode" placeholder="Change owner PIN" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 text-sm font-semibold">
+                    </div>
                 </div>
                 <button onclick="saveSectionRenaming()" class="w-full py-3 bg-boutique-deep hover:bg-boutique-gold hover:text-boutique-deep text-[#FAF6F0] text-[10px] font-bold tracking-widest uppercase rounded-lg transition-colors">
-                    Save Label Customizations
+                    Save Configuration Changes
                 </button>
             </div>
 
@@ -252,7 +318,7 @@
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-boutique-deep uppercase mb-1">Category</label>
-                            <select id="suit-category-select" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 bg-white">
+                            <select id="suit-category-select" class="w-full px-4 py-2.5 rounded-lg border border-boutique-200 bg-white font-semibold">
                                 <!-- Loaded dynamically -->
                             </select>
                         </div>
@@ -289,7 +355,7 @@
             <!-- Demo Reset Controls -->
             <div class="border-t border-boutique-100 pt-6 flex justify-between items-center text-[11px]">
                 <span class="text-boutique-deep/50">Need to restart the boutique inventory demo?</span>
-                <button onclick="resetToDemoDefaults()" class="text-red-500 hover:text-red-700 underline font-semibold uppercase tracking-wider text-[10px]">Reset Defaults</button>
+                <button onclick="triggerResetConfirm()" class="text-red-500 hover:text-red-700 underline font-semibold uppercase tracking-wider text-[10px]">Reset Defaults</button>
             </div>
         </div>
     </div>
@@ -365,13 +431,15 @@
     <footer class="bg-boutique-deep text-[#FAF6F0] py-12 px-6 border-t border-boutique-500/20">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             <div class="text-center md:text-left space-y-1">
-                <span class="editorial-title text-xl font-bold tracking-[0.2em] text-boutique-gold animate-pulse" id="footer-brand-name">NANKI LIWAZ</span>
+                <!-- Double click logo in footer also triggers admin access -->
+                <span class="editorial-title text-xl font-bold tracking-[0.2em] text-boutique-gold cursor-pointer select-none" ondblclick="revealAdminLogin()">NANKI LIWAZ</span>
                 <p class="text-xs text-[#FAF6F0]/60 font-light">Handcrafted, ultra-elegant Ladies Boutique Tailoring.</p>
             </div>
             <div class="flex justify-center gap-6 text-xs text-[#FAF6F0]/80 tracking-widest font-bold">
                 <a href="#catalogue" class="hover:text-boutique-gold transition-colors">GALLERY</a>
                 <a href="#how-it-works" class="hover:text-boutique-gold transition-colors">HOW TO BUY</a>
-                <button onclick="toggleAdminPanel()" class="hover:text-boutique-gold transition-colors uppercase">CUSTOMIZER</button>
+                <span class="text-[#FAF6F0]/30 select-none">|</span>
+                <span class="text-[#FAF6F0]/40 text-[10px] italic">Owner: Double-click logo to edit</span>
             </div>
             <div class="text-center md:text-right text-[10px] text-[#FAF6F0]/50 tracking-wider">
                 <p>&copy; 2026 Nanki Liwaz. All Rights Reserved.</p>
@@ -421,7 +489,8 @@
             heroDesc: 'Browse our delicate hand-picked ladies suit collections. View details, choose standard pricing, or easily quote a comfortable budget to discuss with us on WhatsApp.',
             catTag: 'Exquisite Collections',
             catTitle: 'The Suit Gallery',
-            whatsappNumber: '919999999999' // Placeholder standard global format
+            whatsappNumber: '919999999999', // Placeholder standard global format
+            adminPasscode: '1234' // Default passcode
         };
 
         // Application State Database
@@ -431,6 +500,9 @@
             branding: { ...DEFAULT_BRANDING },
             currentFilter: 'All'
         };
+
+        // Track owner authentication
+        let isOwnerLoggedIn = false;
 
         // Save layout to browser memory
         function saveStateToLocalStorage() {
@@ -442,26 +514,77 @@
             if (saved) {
                 try {
                     appState = JSON.parse(saved);
+                    // Backwards compatibility for passcode parameter
+                    if (!appState.branding.adminPasscode) {
+                        appState.branding.adminPasscode = DEFAULT_BRANDING.adminPasscode;
+                    }
                 } catch (e) {
                     console.error("Error reading boutique data, using defaults.", e);
                 }
             }
+
+            // Check if Owner was previously authorized in this browser session
+            isOwnerLoggedIn = sessionStorage.getItem('nankiliwaz_owner_auth') === 'true';
+            
             renderApp();
         }
 
-        // Reset system function
-        function resetToDemoDefaults() {
-            if (confirm("Are you sure you want to reset Nanki Liwaz back to pristine demo settings?")) {
-                localStorage.removeItem(STATE_KEY);
-                appState = {
-                    suits: [...DEFAULT_SUITS],
-                    categories: [...DEFAULT_SECTIONS],
-                    branding: { ...DEFAULT_BRANDING },
-                    currentFilter: 'All'
-                };
-                renderApp();
-                showToast("Boutique successfully reset to default premium state!");
+        // Custom Confirmation dialog handler
+        function openCustomConfirm(title, message, onProceed) {
+            const modal = document.getElementById('confirm-modal');
+            document.getElementById('confirm-title').innerText = title;
+            document.getElementById('confirm-message').innerText = message;
+
+            const proceedBtn = document.getElementById('confirm-proceed-btn');
+            const cancelBtn = document.getElementById('confirm-cancel-btn');
+
+            // Clear previous event listeners
+            const newProceedBtn = proceedBtn.cloneNode(true);
+            const newCancelBtn = cancelBtn.cloneNode(true);
+            proceedBtn.parentNode.replaceChild(newProceedBtn, proceedBtn);
+            cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.children[0].classList.remove('scale-95', 'opacity-0');
+                modal.children[0].classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            function closeConfirm() {
+                modal.children[0].classList.add('scale-95', 'opacity-0');
+                modal.children[0].classList.remove('scale-100', 'opacity-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
             }
+
+            newProceedBtn.onclick = () => {
+                closeConfirm();
+                onProceed();
+            };
+
+            newCancelBtn.onclick = () => {
+                closeConfirm();
+            };
+        }
+
+        function triggerResetConfirm() {
+            openCustomConfirm(
+                "Reset Boutique Defaults?",
+                "Are you sure you want to reset Nanki Liwaz back to pristine default setting? All custom modifications will be lost.",
+                () => {
+                    localStorage.removeItem(STATE_KEY);
+                    appState = {
+                        suits: [...DEFAULT_SUITS],
+                        categories: [...DEFAULT_SECTIONS],
+                        branding: { ...DEFAULT_BRANDING },
+                        currentFilter: 'All'
+                    };
+                    saveStateToLocalStorage();
+                    renderApp();
+                    showToast("Boutique successfully reset to default premium state!");
+                }
+            );
         }
 
         // Premium toast system
@@ -506,7 +629,6 @@
         function renderApp() {
             // Apply Branding to UI
             document.getElementById('nav-brand-name').innerText = appState.branding.brandName;
-            document.getElementById('footer-brand-name').innerText = appState.branding.brandName;
             document.getElementById('section-hero-tag').innerText = appState.branding.heroTag;
             document.getElementById('section-hero-title').innerHTML = appState.branding.heroTitle;
             document.getElementById('section-hero-desc').innerText = appState.branding.heroDesc;
@@ -520,6 +642,19 @@
             document.getElementById('edit-cat-tag').value = appState.branding.catTag;
             document.getElementById('edit-cat-title').value = appState.branding.catTitle;
             document.getElementById('admin-whatsapp-input').value = appState.branding.whatsappNumber;
+            document.getElementById('edit-admin-passcode').value = appState.branding.adminPasscode || '1234';
+
+            // Show or hide admin panel entry points strictly based on owner login session status
+            const adminBadge = document.getElementById('admin-header-badge');
+            if (isOwnerLoggedIn) {
+                adminBadge.classList.remove('hidden');
+            } else {
+                adminBadge.classList.add('hidden');
+                // Ensure editor window is safely closed if owner logged out
+                document.getElementById('admin-panel').classList.add('translate-x-full');
+                document.getElementById('admin-panel').classList.add('hidden');
+                document.getElementById('admin-btn-text').innerText = "Boutique Panel";
+            }
 
             // Render Suit Category Tabs
             renderCategoryTabs();
@@ -569,7 +704,8 @@
                 grid.innerHTML = `
                     <div class="col-span-full py-16 text-center space-y-4">
                         <i class="fa-solid fa-folder-open text-4xl text-boutique-gold/40"></i>
-                        <p class="text-boutique-deep/60 font-light">No custom outfits uploaded in this gallery yet. Open the Boutique Panel to publish outfits instantly.</p>
+                        <p class="text-boutique-deep/60 font-light">No custom outfits uploaded in this gallery yet.</p>
+                        ${isOwnerLoggedIn ? '<p class="text-[10px] text-boutique-gold font-bold uppercase tracking-widest">Use the Boutique Panel to publish outfits instantly.</p>' : ''}
                     </div>
                 `;
                 return;
@@ -582,6 +718,13 @@
                 // Fallback display
                 const finalImgSrc = suit.imageUrl || 'https://placehold.co/600x800/f5ebe6/2d221d?text=Luxury+Collection';
 
+                // Display delete options strictly when logged in
+                const deleteActionBtn = isOwnerLoggedIn 
+                    ? `<button onclick="triggerSuitDelete('${suit.id}')" class="absolute top-4 right-4 bg-red-500/90 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md" title="Delete design">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                       </button>`
+                    : '';
+
                 card.innerHTML = `
                     <div>
                         <!-- Image Container -->
@@ -590,10 +733,7 @@
                             <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-boutique-deep text-[10px] uppercase tracking-widest font-bold px-3 py-1.5 rounded-full shadow-sm">
                                 ${suit.category}
                             </span>
-                            <!-- Delete button (visible on hover) -->
-                            <button onclick="deleteSuit('${suit.id}')" class="absolute top-4 right-4 bg-red-500/90 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md" title="Delete design">
-                                <i class="fa-solid fa-trash text-xs"></i>
-                            </button>
+                            ${deleteActionBtn}
                         </div>
                         
                         <!-- Content Details -->
@@ -607,7 +747,7 @@
                     <div class="p-6 pt-0 border-t border-boutique-100/50 mt-auto flex items-center justify-between gap-4">
                         <div>
                             <span class="text-[9px] uppercase text-boutique-deep/40 tracking-widest font-bold block">Estimated Value</span>
-                            <span class="text-lg font-bold text-boutique-deep font-serif">$${suit.price.toLocaleString()}</span>
+                            <span class="text-lg font-bold text-[#2D221D] font-serif">$${suit.price.toLocaleString()}</span>
                         </div>
                         <button onclick="openQuoteModal('${suit.id}')" class="px-5 py-3 bg-boutique-deep hover:bg-boutique-gold hover:text-boutique-deep text-[#FAF6F0] text-[10px] font-bold tracking-widest uppercase rounded-xl transition-all duration-300 transform active:scale-95 shadow-sm">
                             Quote Price
@@ -643,13 +783,70 @@
                     badge.className = "inline-flex items-center gap-1.5 bg-boutique-100 text-boutique-deep px-3 py-1 rounded-full text-xs font-semibold";
                     badge.innerHTML = `
                         ${cat}
-                        <button onclick="deleteCategory('${cat}')" class="hover:text-red-500 transition-colors">
+                        <button onclick="triggerCategoryDelete('${cat}')" class="hover:text-red-500 transition-colors">
                             <i class="fa-solid fa-circle-xmark"></i>
                         </button>
                     `;
                     badgeContainer.appendChild(badge);
                 });
             }
+        }
+
+        // Owner Access Security Logins
+        function revealAdminLogin() {
+            // Reset input field first
+            document.getElementById('admin-passcode-input').value = '';
+
+            const modal = document.getElementById('admin-login-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.children[0].classList.remove('scale-95', 'opacity-0');
+                modal.children[0].classList.add('scale-100', 'opacity-100');
+            }, 10);
+            
+            document.getElementById('admin-passcode-input').focus();
+        }
+
+        function closeAdminLogin() {
+            const modal = document.getElementById('admin-login-modal');
+            modal.children[0].classList.add('scale-95', 'opacity-0');
+            modal.children[0].classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function verifyAdminPasscode() {
+            const pinEntered = document.getElementById('admin-passcode-input').value;
+            const correctPin = appState.branding.adminPasscode || '1234';
+
+            if (pinEntered === correctPin) {
+                isOwnerLoggedIn = true;
+                sessionStorage.setItem('nankiliwaz_owner_auth', 'true');
+                closeAdminLogin();
+                renderApp();
+                showToast("Welcome back! Boutique Owner customizer unlocked.");
+                
+                // Immediately open the customizer panel on successful login
+                setTimeout(() => {
+                    toggleAdminPanel();
+                }, 400);
+            } else {
+                showToast("Incorrect passcode. Access Denied.", false);
+            }
+        }
+
+        function logoutAdmin() {
+            openCustomConfirm(
+                "Lock & Logout?",
+                "This hides the owner customizer dashboard and locks the screen editing. You will need to double-click the brand name logo again to unlock it.",
+                () => {
+                    isOwnerLoggedIn = false;
+                    sessionStorage.removeItem('nankiliwaz_owner_auth');
+                    renderApp();
+                    showToast("Boutique panel locked and secured.");
+                }
+            );
         }
 
         // Label Customization
@@ -660,6 +857,12 @@
             appState.branding.catTag = document.getElementById('edit-cat-tag').value.trim() || DEFAULT_BRANDING.catTag;
             appState.branding.catTitle = document.getElementById('edit-cat-title').value.trim() || DEFAULT_BRANDING.catTitle;
             
+            // Passcode Customization
+            const newPasscode = document.getElementById('edit-admin-passcode').value.trim();
+            if (newPasscode) {
+                appState.branding.adminPasscode = newPasscode;
+            }
+
             // Capture updated WhatsApp phone numbers
             const rawWhatsApp = document.getElementById('admin-whatsapp-input').value.replace(/[^0-9]/g, '');
             if (rawWhatsApp) {
@@ -695,24 +898,28 @@
             showToast(`Added section: "${newCat}"`);
         }
 
-        function deleteCategory(catName) {
-            if (confirm(`Are you sure you want to delete "${catName}"? Associated outfits will become uncategorized.`)) {
-                appState.categories = appState.categories.filter(cat => cat !== catName);
-                
-                appState.suits.forEach(suit => {
-                    if (suit.category === catName) {
-                        suit.category = appState.categories[0] || 'All';
+        function triggerCategoryDelete(catName) {
+            openCustomConfirm(
+                "Delete Category?",
+                `Are you sure you want to delete the category "${catName}"? Associated outfits will automatically become uncategorized.`,
+                () => {
+                    appState.categories = appState.categories.filter(cat => cat !== catName);
+                    
+                    appState.suits.forEach(suit => {
+                        if (suit.category === catName) {
+                            suit.category = appState.categories[0] || 'All';
+                        }
+                    });
+
+                    if (appState.currentFilter === catName) {
+                        appState.currentFilter = 'All';
                     }
-                });
 
-                if (appState.currentFilter === catName) {
-                    appState.currentFilter = 'All';
+                    saveStateToLocalStorage();
+                    renderApp();
+                    showToast(`Category "${catName}" deleted.`);
                 }
-
-                saveStateToLocalStorage();
-                renderApp();
-                showToast(`Section deleted.`);
-            }
+            );
         }
 
         // Submit New Ladies Suit
@@ -763,16 +970,20 @@
         }
 
         // Delete Catalog Item
-        function deleteSuit(id) {
+        function triggerSuitDelete(id) {
             const targetSuit = appState.suits.find(s => s.id === id);
             const suitName = targetSuit ? targetSuit.name : "Outfit";
 
-            if (confirm(`Are you sure you want to remove "${suitName}" from Nanki Liwaz collection?`)) {
-                appState.suits = appState.suits.filter(suit => suit.id !== id);
-                saveStateToLocalStorage();
-                renderApp();
-                showToast(`Removed "${suitName}" from inventory.`);
-            }
+            openCustomConfirm(
+                "Delete Outfit Design?",
+                `Are you sure you want to permanently remove the "${suitName}" design from the Nanki Liwaz collection?`,
+                () => {
+                    appState.suits = appState.suits.filter(suit => suit.id !== id);
+                    saveStateToLocalStorage();
+                    renderApp();
+                    showToast(`Removed "${suitName}" from inventory.`);
+                }
+            );
         }
 
         // Slide Panels Toggle Control
@@ -871,6 +1082,44 @@
             window.open(waUrl, '_blank');
         }
 
+        // MAGIC GITHUB EXPORTER (Compiles state changes directly into original code file)
+        async function exportUpdatedHTML() {
+            try {
+                // Fetch current source code file content
+                let response = await fetch(window.location.href);
+                let text = await response.text();
+                
+                // Replace hardcoded default parameters with currently customized ones
+                const suitsRegex = /const DEFAULT_SUITS = \[\s*[\s\S]*?\];/;
+                const sectionsRegex = /const DEFAULT_SECTIONS = \[\s*[\s\S]*?\];/;
+                const brandingRegex = /const DEFAULT_BRANDING = \{\s*[\s\S]*?\};/;
+                
+                let updatedText = text;
+                updatedText = updatedText.replace(suitsRegex, `const DEFAULT_SUITS = ${JSON.stringify(appState.suits, null, 12)};`);
+                updatedText = updatedText.replace(sectionsRegex, `const DEFAULT_SECTIONS = ${JSON.stringify(appState.categories, null, 12)};`);
+                updatedText = updatedText.replace(brandingRegex, `const DEFAULT_BRANDING = ${JSON.stringify(appState.branding, null, 12)};`);
+                
+                // Force reset owner lock status in downloaded copy so clients don't see buttons on refresh
+                updatedText = updatedText.replace(/let isOwnerLoggedIn = true;/, 'let isOwnerLoggedIn = false;');
+                
+                // Create clean text blob and trigger file download instantly
+                const blob = new Blob([updatedText], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'index.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showToast("Website file updated! Upload this index.html to GitHub now.", true);
+            } catch (err) {
+                console.error("Export error details:", err);
+                showToast("Could not export automatically from file://. Please upload to GitHub first to use dynamic exports.", false);
+            }
+        }
+
         // Initialization
         window.onload = function() {
             loadState();
@@ -878,5 +1127,3 @@
     </script>
 </body>
 </html>
-
-
